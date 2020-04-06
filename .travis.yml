@@ -22,6 +22,9 @@ before_install:
 install:
 - docker run -d --name qgis-testing-environment -v ${TRAVIS_BUILD_DIR}:/tests_directory -e DISPLAY=:99 qgis-testing-environment
 - echo ${TRAVIS_BUILD_DIR}
+- docker exec -it qgis-testing-environment sh -c "ls -a /"
+- docker exec -it qgis-testing-environment sh -c "ls -a /tests_directory"
+- docker exec -it qgis-testing-environment sh -c "ls -a ${TRAVIS_BUILD_DIR}"
 - sleep 10
 - docker exec -it qgis-testing-environment sh -c "qgis_setup.sh ${PLUGIN_NAME}"
 - docker exec -it qgis-testing-environment sh -c "$PIP_EXECUTABLE install paver"
